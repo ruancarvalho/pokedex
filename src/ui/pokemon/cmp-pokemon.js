@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
 
+const imageUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
+//https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/
+
 class Pokemon extends PureComponent {
   render() {
     const { pokemon } = this.props
@@ -10,9 +13,11 @@ class Pokemon extends PureComponent {
           type="button"
           className="pokemon__sprite"
           style={{
-            backgroundImage: `url(${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-              pokemon.id
-            }.png`})`
+            backgroundImage: `url(${`${imageUrl}${pokemon.id.padStart(
+              3,
+              '0'
+            )}.png`})`,
+            backgroundSize: 'contain'
           }}
         />
         <p className="pokemon__name">{pokemon.name}</p>
