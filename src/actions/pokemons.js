@@ -5,7 +5,7 @@ export const GET_POKEMONS_SUCCESS = 'GET_POKEMONS_SUCCESS'
 export const GET_POKEMONS_FAILURE = 'GET_POKEMONS_FAILURE'
 
 export const getPokemons = (options = {}) => dispatch => {
-  const { limit = 784 } = options
+  const { limit = 964 } = options
 
   return dispatch({
     [RSAA]: {
