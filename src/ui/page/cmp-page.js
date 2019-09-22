@@ -66,7 +66,9 @@ class Page extends Component {
     return (
       <div className="page">
         {error && <div className="page__error">{error}</div>}
-        <img src="https://res.cloudinary.com/webdevacademy/image/upload/v1568848672/pokedex/pokedex-md.png" />
+        <div className="page__logo">
+          <h1>Pokedex</h1>
+        </div>
         <div className="page__search">
           <Search onChange={this.handleSearch} value={searchString} />
         </div>

@@ -13,11 +13,19 @@ body {
 }
 
 .page__logo {
-  padding-top: 10px;
+  background-image: url('https://res.cloudinary.com/webdevacademy/image/upload/v1568848672/pokedex/pokedex-md.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 103px;
+  margin-bottom: 1rem;
+}
+
+.page__logo > h1 {
+  display: none;
 }
 
 .page__search {
-  padding-top: 10px;
+  margin-bottom: 1rem;
 }
 
 .page__search > input {
