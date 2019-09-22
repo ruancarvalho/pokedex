@@ -17,26 +17,6 @@ class Page extends Component {
           error: action.payload.message
         })
       }
-
-      const searchString = hardtack.get('searchString')
-      const { collection } = this.props
-
-      if (!searchString) {
-        return this.setState({
-          pokemonsIds: Object.keys(collection)
-        })
-      }
-
-      const pokemonsIds = Object.keys(collection).filter(pokemonId => {
-        const pokemon = collection[pokemonId]
-
-        return pokemon.name.includes(searchString)
-      })
-
-      this.setState({
-        pokemonsIds,
-        searchString
-      })
     })
   }
 
@@ -48,18 +28,20 @@ class Page extends Component {
       maxAge: '31536000'
     })
 
-    if (value === '') {
+    if (value === '' || value.length < 3) {
       return this.setState({
-        pokemonsIds: Object.keys(collection),
+        pokemonsIds: [],
         searchString: value
       })
     }
 
-    const pokemonsIds = Object.keys(collection).filter(pokemonId => {
-      const pokemon = collection[pokemonId]
+    const pokemonsIds = Object.keys(collection)
+      .filter(pokemonId => {
+        const pokemon = collection[pokemonId]
 
-      return pokemon.name.includes(value)
-    })
+        return pokemon.name.includes(value)
+      })
+      .slice(0, 4)
 
     this.setState({
       pokemonsIds,
