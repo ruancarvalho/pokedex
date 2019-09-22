@@ -12,12 +12,16 @@ body {
   text-align: center;
 }
 
+.page__logo {
+  padding-top: 10px;
+}
+
 .page__search {
   padding-top: 10px;
 }
 
 .page__search > input {
-  border-radius: 6px;
+  border-radius: 0.5rem;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin: 20px 0;
@@ -56,11 +60,20 @@ body {
   position: relative;
   z-index: 20000;
   overflow: hidden;
-  background-color: #eee;
+  background-color: #fcfcfc;
+  cursor: pointer;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 
+.pokemon:hover {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .pokemon__sprite {
+  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
@@ -69,8 +82,13 @@ body {
   z-index: 10;
   border: none;
   background-color: transparent;
-  background-position: center center;
+  background-position: top center;
   background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.pokemon__sprite:focus {
+  outline: 0;
 }
 
 .pokemon,
@@ -82,21 +100,22 @@ body {
 .pokemon__name {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   z-index: 20;
   margin: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: black;
+  font-weight: bold;
   text-align: center;
   font-size: 14px;
   pointer-events: none;
+  text-transform: capitalize;
 }
 
 @media (min-width: 992px) {
   .pokemon,
   .pokemon__sprite {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 220px;
   }
 }

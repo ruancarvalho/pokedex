@@ -16,8 +16,7 @@ class Pokemon extends PureComponent {
             backgroundImage: `url(${`${imageUrl}${pokemon.id.padStart(
               3,
               '0'
-            )}.png`})`,
-            backgroundSize: 'contain'
+            )}.png`})`
           }}
         />
         <p className="pokemon__name">{pokemon.name}</p>
