@@ -6,6 +6,7 @@ const imageUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
 class Pokemon extends PureComponent {
   render() {
     const { pokemon } = this.props
+    const id = pokemon.id.padStart(3, '0')
 
     return (
       <div className="pokemon">
@@ -13,10 +14,7 @@ class Pokemon extends PureComponent {
           type="button"
           className="pokemon__sprite"
           style={{
-            backgroundImage: `url(${`${imageUrl}${pokemon.id.padStart(
-              3,
-              '0'
-            )}.png`})`
+            backgroundImage: `url(${`${imageUrl}${id}.png`})`
           }}
         />
         <p className="pokemon__name">{pokemon.name}</p>
