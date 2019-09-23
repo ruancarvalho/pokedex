@@ -103,7 +103,13 @@ class Page extends Component {
           )}
         </div>
 
-        <Modal isOpen={this.state.showModal}>
+        <Modal
+          className="modal"
+          isOpen={this.state.showModal}
+          overlayClassName="overlay"
+          onRequestClose={this.handleCloseModal.bind(this)}
+          shouldCloseOnOverlayClick={true}
+        >
           <PokemonDetails id={this.state.currentPokemon} />
           <button onClick={this.handleCloseModal.bind(this)}>
             Close Modal

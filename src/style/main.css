@@ -103,7 +103,7 @@ body {
   height: 140px;
 }
 
-.pokemon__name {
+.pokemon > .pokemon__name {
   position: absolute;
   right: 0;
   bottom: 10px;
@@ -117,10 +117,60 @@ body {
   text-transform: capitalize;
 }
 
+.pokemon__details {
+  margin: 2rem;
+}
+
+.pokemon__details > .pokemon__image {
+  background: #eee;
+}
+
+.pokemon__details .pokemon__name {
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.pokemon__details .pokemon__name > span {
+  float: right;
+}
+
 @media (min-width: 992px) {
   .pokemon,
   .pokemon__sprite {
     width: 180px;
     height: 220px;
   }
+}
+
+/**
+ * Pokemon Details Modal
+ */
+
+.modal {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5rem;
+  left: 0;
+  max-width: 600px;
+  margin: 3rem auto;
+  outline: none;
+  position: absolute;
+  right: 0;
+}
+
+.overlay {
+  background-color: rgba(1, 1, 1, 0.75);
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.overlay::-webkit-scrollbar {
+  display: none;
 }
