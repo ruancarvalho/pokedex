@@ -1,26 +1,21 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-const imageUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
-//https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/
+const Pokemon = ({ pokemon }) => {
+  const id = pokemon.id.padStart(3, '0')
+  const baseUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
 
-class Pokemon extends PureComponent {
-  render() {
-    const { pokemon } = this.props
-    const id = pokemon.id.padStart(3, '0')
-
-    return (
-      <div className="pokemon">
-        <button
-          type="button"
-          className="pokemon__sprite"
-          style={{
-            backgroundImage: `url(${`${imageUrl}${id}.png`})`
-          }}
-        />
-        <p className="pokemon__name">{pokemon.name}</p>
-      </div>
-    )
-  }
+  return (
+    <div className="pokemon">
+      <button
+        type="button"
+        className="pokemon__sprite"
+        style={{
+          backgroundImage: `url(${`${baseUrl}${id}.png`})`
+        }}
+      />
+      <p className="pokemon__name">{pokemon.name}</p>
+    </div>
+  )
 }
 
 export default Pokemon
