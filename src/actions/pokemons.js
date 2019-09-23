@@ -10,8 +10,7 @@ export const GET_POKEMONS_REQUEST = 'GET_POKEMONS_REQUEST'
 export const GET_POKEMONS_SUCCESS = 'GET_POKEMONS_SUCCESS'
 export const GET_POKEMONS_FAILURE = 'GET_POKEMONS_FAILURE'
 
-export const getPokemon = (id = null) => dispatch => {
-  console.log('getPokemon', id)
+export const getPokemon = (id = '') => dispatch => {
   return dispatch({
     [RSAA]: {
       endpoint: `https://pokeapi.co/api/v2/pokemon/${id}`,

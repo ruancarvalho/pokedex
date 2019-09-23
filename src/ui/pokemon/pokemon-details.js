@@ -8,13 +8,15 @@ const PokemonDetails = ({ id }) => {
 
   useEffect(
     () => {
-      dispatch(getPokemon(id))
+      if (id) {
+        dispatch(getPokemon(id))
+      }
 
       return function cleanup() {
         dispatch({ type: CLEAR_CURRENT_POKEMON })
       }
     },
-    [getPokemon, dispatch]
+    [id, dispatch]
   )
 
   if (!current.hasOwnProperty('id')) return null
