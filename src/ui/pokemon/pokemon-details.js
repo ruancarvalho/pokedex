@@ -33,7 +33,7 @@ const PokemonDetails = ({ id }) => {
         </h2>
       </header>
       <section className="pokemon__image">
-        <img src={`${baseUrl}${pid}.png`} />
+        <img src={`${baseUrl}${pid}.png`} alt={current.name} />
       </section>
       <p>{current.base_experience}</p>
       <p>{current.height}</p>

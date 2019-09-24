@@ -1,123 +1,108 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import hardtack from 'hardtack'
+import Modal from 'react-modal'
 import Pokemon from '../pokemon/cmp-pokemon'
 import PokemonDetails from '../pokemon/pokemon-details'
 import Search from '../search/cmp-search'
-import Modal from 'react-modal'
 
-Modal.setAppElement('#root')
+const Page = (props = {}) => {
+  const [currentPokemon, setCurrentPokemon] = useState(null)
+  const [error, setError] = useState(null)
+  const [pokemonsIds, setPokemonsIds] = useState([])
+  const [searchString, setSearchString] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const { getPokemons } = props
 
-class Page extends Component {
-  state = {
-    searchString: '',
-    pokemonsIds: [],
-    error: null,
-    showModal: false
-  }
-
-  componentDidMount() {
-    this.props.getPokemons().then(action => {
-      if (action.error) {
-        return this.setState({
-          error: action.payload.message
-        })
-      }
-    })
-  }
-
-  handleSearch = event => {
+  const handleSearch = event => {
     const value = event.currentTarget.value.toLowerCase().trim()
-    const { collection } = this.props
+    const { collection } = props
 
     hardtack.set('searchString', value, {
       maxAge: '31536000'
     })
 
-    if (value === '' || value.length < 3) {
-      return this.setState({
-        pokemonsIds: [],
-        searchString: value
-      })
+    let found = []
+
+    // do the search only after 3 letters typed
+    if (value !== '' && value.length > 2) {
+      found = Object.keys(collection)
+        .filter(pokemonId => {
+          const pokemon = collection[pokemonId]
+          return pokemon.name.includes(value)
+        })
+        .slice(0, 4)
     }
 
-    const pokemonsIds = Object.keys(collection)
-      .filter(pokemonId => {
-        const pokemon = collection[pokemonId]
-
-        return pokemon.name.includes(value)
-      })
-      .slice(0, 4)
-
-    this.setState({
-      pokemonsIds,
-      searchString: value
-    })
+    setPokemonsIds(found)
+    setSearchString(value)
   }
 
-  handlePokemonClick(id) {
-    this.setState({
-      currentPokemon: id,
-      showModal: true
-    })
+  const handlePokemonClick = id => {
+    setCurrentPokemon(id)
+    setShowModal(true)
   }
 
-  handleCloseModal() {
-    this.setState({
-      currentPokemon: null,
-      showModal: false
-    })
+  const handleCloseModal = () => {
+    setCurrentPokemon(null)
+    setShowModal(false)
   }
 
-  render() {
-    const { searchString, pokemonsIds, error } = this.state
-    const { collection, isFetched } = this.props
-
-    const pokemons = pokemonsIds.map(pokemonId => {
-      const pokemon = collection[pokemonId]
-
-      return (
-        <li
-          key={pokemon.id}
-          className="pokemons__item"
-          onClick={this.handlePokemonClick.bind(this, pokemon.id)}
-        >
-          <Pokemon pokemon={pokemon} />
-        </li>
-      )
-    })
+  const pokemons = pokemonsIds.map(id => {
+    const pokemon = props.collection[id]
 
     return (
-      <Fragment>
-        <div className="page">
-          {error && <div className="page__error">{error}</div>}
-          <div className="page__logo">
-            <h1>Pokedex</h1>
-          </div>
-          <div className="page__search">
-            <Search onChange={this.handleSearch} value={searchString} />
-          </div>
-          {isFetched ? (
-            <p>Loading...</p>
-          ) : (
-            <ul className="pokemons">{pokemons}</ul>
-          )}
-        </div>
-
-        <Modal
-          className="modal"
-          isOpen={this.state.showModal}
-          overlayClassName="overlay"
-          onRequestClose={this.handleCloseModal.bind(this)}
-          shouldCloseOnOverlayClick={true}
-        >
-          <PokemonDetails id={this.state.currentPokemon} />
-          <button onClick={this.handleCloseModal.bind(this)}>
-            Close Modal
-          </button>
-        </Modal>
-      </Fragment>
+      <li
+        key={pokemon.id}
+        className="pokemons__item"
+        onClick={handlePokemonClick.bind(this, pokemon.id)}
+      >
+        <Pokemon pokemon={pokemon} />
+      </li>
     )
-  }
+  })
+
+  useEffect(
+    () => {
+      getPokemons().then(action => {
+        if (action.error) {
+          return setError(action.payload.message)
+        }
+      })
+    },
+    [getPokemons]
+  )
+
+  Modal.setAppElement('#root')
+
+  return (
+    <Fragment>
+      <div className="page">
+        {error && <div className="page__error">{error}</div>}
+        <div className="page__logo">
+          <h1>Pokedex</h1>
+        </div>
+        <div className="page__search">
+          <Search onChange={handleSearch} value={searchString} />
+        </div>
+        {props.isFetched ? (
+          <p>Loading...</p>
+        ) : (
+          <ul className="pokemons">{pokemons}</ul>
+        )}
+      </div>
+
+      <Modal
+        className="modal"
+        isOpen={showModal}
+        overlayClassName="overlay"
+        onRequestClose={handleCloseModal}
+        shouldCloseOnOverlayClick={true}
+      >
+        <PokemonDetails id={currentPokemon} />
+        <button onClick={handleCloseModal}>Close Modal</button>
+      </Modal>
+    </Fragment>
+  )
 }
 
 export default Page
