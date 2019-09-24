@@ -23,6 +23,7 @@ const PokemonDetails = ({ id }) => {
 
   const baseUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'
   const pid = current.id.toString().padStart(3, '0')
+  const math = require('mathjs')
 
   return (
     <div className="pokemon__details">
@@ -35,10 +36,14 @@ const PokemonDetails = ({ id }) => {
       <section className="pokemon__image">
         <img src={`${baseUrl}${pid}.png`} alt={current.name} />
       </section>
-      <p>{current.base_experience}</p>
-      <p>{current.height}</p>
-      <p>{current.order}</p>
-      <p>{current.weight}</p>
+      <section className="pokemon__info">
+        <dl>
+          <dt>Height</dt>
+          <dd>{math.evaluate(`number(${current.height} dm, m)`)} m</dd>
+          <dt>Weight</dt>
+          <dd>{math.evaluate(`number(${current.weight} hg, kg)`)} kg</dd>
+        </dl>
+      </section>
     </div>
   )
 }

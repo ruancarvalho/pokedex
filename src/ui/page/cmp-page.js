@@ -83,7 +83,6 @@ const Page = (props = {}) => {
         shouldCloseOnOverlayClick={true}
       >
         <PokemonDetails id={currentPokemon} />
-        <button onClick={handleCloseModal}>Close Modal</button>
       </Modal>
     </Fragment>
   )
