@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import hardtack from 'hardtack'
 import Modal from 'react-modal'
-import Pokemon from '../pokemon/cmp-pokemon'
 import PokemonDetails from '../pokemon/pokemon-details'
+import PokemonList from '../pokemon/pokemon-list'
 import Search from '../search/cmp-search'
 
 const Page = (props = {}) => {
@@ -47,20 +47,6 @@ const Page = (props = {}) => {
     setShowModal(false)
   }
 
-  const pokemons = pokemonsIds.map(id => {
-    const pokemon = props.collection[id]
-
-    return (
-      <li
-        key={pokemon.id}
-        className="pokemons__item"
-        onClick={handlePokemonClick.bind(this, pokemon.id)}
-      >
-        <Pokemon pokemon={pokemon} />
-      </li>
-    )
-  })
-
   useEffect(
     () => {
       getPokemons().then(action => {
@@ -77,17 +63,15 @@ const Page = (props = {}) => {
   return (
     <Fragment>
       <div className="page">
-        {error && <div className="page__error">{error}</div>}
         <div className="page__logo">
           <h1>Pokedex</h1>
         </div>
         <div className="page__search">
           <Search onChange={handleSearch} value={searchString} />
         </div>
-        {props.isFetched ? (
-          <p>Loading...</p>
-        ) : (
-          <ul className="pokemons">{pokemons}</ul>
+        {error && <div className="page__error">{error}</div>}
+        {searchString.length >= 3 && (
+          <PokemonList items={pokemonsIds} onItemClick={handlePokemonClick} />
         )}
       </div>
 
