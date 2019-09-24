@@ -25,7 +25,7 @@ export const getPokemon = (id = '') => dispatch => {
 }
 
 export const getPokemons = (options = {}) => dispatch => {
-  const { limit = 964 } = options
+  const { limit = 784 } = options
 
   return dispatch({
     [RSAA]: {
