@@ -6,7 +6,7 @@
   "contributors": [
     "Ruan Carvalho <ruancarvalho@gmail.com> (http://webdevacadey.com.br)"
   ],
-  "homepage": "https://alik0211.github.io/pokedex/",
+  "homepage": "https://ruancarvalho-pokedex.netlify.com/",
   "dependencies": {
     "hardtack": "4.1.0",
     "react": "^16.9.0",
