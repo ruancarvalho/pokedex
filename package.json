@@ -3,21 +3,25 @@
   "version": "3.0.0",
   "private": true,
   "author": "Ali Gasymov <alik0211alik@gmail.com> (https://alik0211.com/)",
+  "contributors": [
+    "Ruan Carvalho <ruancarvalho@gmail.com> (http://webdevacadey.com.br)"
+  ],
   "homepage": "https://alik0211.github.io/pokedex/",
   "dependencies": {
     "hardtack": "4.1.0",
-    "react": "16.7.0",
-    "react-dom": "16.7.0",
-    "react-redux": "6.0.0",
-    "redux": "4.0.1",
-    "redux-api-middleware": "3.0.1",
-    "redux-thunk": "2.3.0"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-modal": "^3.10.1",
+    "react-redux": "^7.1.1",
+    "redux": "4.0.4",
+    "redux-api-middleware": "^3.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "husky": "1.3.1",
     "lint-staged": "8.1.5",
     "prettier": "1.15.3",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.1.1",
     "redux-logger": "3.0.6"
   },
   "scripts": {
